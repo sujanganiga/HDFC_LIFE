@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>CSS Position Lab</title>
 
@@ -48,41 +49,272 @@
 
             font-size: 14px;
         }
-        .notifiymain{
+
+        .main {
             border: 1px solid black;
             padding: 20px;
             margin: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20rem;
+            gap: 10rem;
         }
 
+        .sticky-section {
+            border: 1px solid #ccc;
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 0;
+
+            background: lightblue;
+
+            padding: 15px;
+
+            font-weight: bold;
+        }
+
+        .items div {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .floating-button {
+            position: fixed;
+
+            bottom: 20px;
+            right: 20px;
+
+            width: 56px;
+            height: 56px;
+
+            border-radius: 50%;
+
+            border: none;
+
+            background: darkblue;
+            color: white;
+
+            font-size: 28px;
+
+            cursor: pointer;
+        }
+
+        .cards-wrapper {
+            position: relative;
+            /* transform: scale(1); */
+
+            height: 250px;
+        }
+
+        .card {
+            position: absolute;
+
+            width: 200px;
+            height: 150px;
+
+            padding: 20px;
+
+            border: 2px solid black;
+            border-radius: 10px;
+
+            box-sizing: border-box;
+        }
+
+        .card-left {
+            top: 30px;
+            left: 50px;
+
+            background: lightblue;
+
+            z-index: 2;
+        }
+
+        .card-right {
+            top: 100px;
+            left: 200px;
+
+            background: lightgreen;
+
+            z-index: 0;
+        }
+
+        .dropdown-card {
+    position: relative;
+
+    width: 300px;
+    height: 150px;
+
+    padding: 20px;
+
+    border: 2px solid black;
+    border-radius: 10px;
+
+    /* overflow: hidden; */
+}
+
+.dropdown-button {
+    padding: 10px 15px;
+
+    border: 1px solid #999;
+    border-radius: 5px;
+
+    background: white;
+
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+
+    top: 120px;
+    left: 20px;
+
+    width: 150px;
+
+    background: white;
+
+    border: 1px solid #999;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    z-index: 10;
+}
+
+.dropdown-menu div {
+    padding: 10px;
+}
+
+.dropdown-menu div:hover {
+    background: #eee;
+}
     </style>
 </head>
 
 <body>
-
     <h1>CSS Position Lab</h1>
 
-    <div class="notifiymain">
-
-
+    <div class="main">
         <h2>Notification Badge</h2>
 
         <div class="avatarMain">
+            <div class="avatar">A</div>
 
-            <div class="avatar">
-                A
+            <div class="noti">3</div>
+        </div>
+    </div>
+
+    <div class="main">
+        <h2>Sticky Section Header</h2>
+
+        <div class="sticky-section">
+            <div class="sticky-header">My Sticky Header</div>
+
+            <div class="items">
+                <div>Item 1</div>
+                <div>Item 2</div>
+                <div>Item 3</div>
+                <div>Item 4</div>
+                <div>Item 5</div>
+                <div>Item 6</div>
+                <div>Item 7</div>
+                <div>Item 8</div>
+                <div>Item 9</div>
+                <div>Item 10</div>
+                <div>Item 11</div>
+                <div>Item 12</div>
+                <div>Item 13</div>
+                <div>Item 14</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+
+        <h2>Floating Action Button</h2>
+
+        <p>
+            Scroll the page and observe the button.
+        </p>
+
+    </div>
+
+    <button class="floating-button">
+        +
+    </button>
+
+    <div class="main">
+
+        <h2>Overlapping Cards</h2>
+
+        <div class="cards-wrapper">
+
+            <div class="card card-left">
+                <h3>Card 1</h3>
+                <p>Left card</p>
             </div>
 
-            <div class="noti">
-                3
+            <div class="card card-right">
+                <h3>Card 2</h3>
+                <p>Right card</p>
             </div>
 
         </div>
 
     </div>
 
+    <div class="main">
+
+    <h2>The Stacking Context Trap</h2>
+
+    <div class="cards-wrapper">
+
+        <div class="card card-left">
+            <h3>Card 1</h3>
+            <p>Outside wrapper</p>
+        </div>
+
+        <div class="card-wrapper">
+
+            <div class="card card-right">
+                <h3>Card 2</h3>
+                <p>Inside wrapper</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+    <div class="main">
+
+    <h2>1.6 Dropdown Clipped by Overflow</h2>
+
+    <div class="dropdown-card">
+
+        <h3>Product Card</h3>
+
+        <button class="dropdown-button">
+            Options ▼
+        </button>
+
+        <div class="dropdown-menu">
+
+            <div>Edit</div>
+            <div>Delete</div>
+            <div>Share</div>
+
+        </div>
+
+    </div>
+
+</div>
+    
+
+
+</div>
 </body>
+
 </html>
