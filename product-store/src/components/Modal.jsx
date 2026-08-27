@@ -3,7 +3,6 @@ import { X } from "lucide-react";
 
 function Modal({ isOpen, onClose, title, children }) {
 
-  // Close modal when Escape is pressed
   useEffect(() => {
     if (!isOpen) return;
 
@@ -20,7 +19,6 @@ function Modal({ isOpen, onClose, title, children }) {
     };
   }, [isOpen, onClose]);
 
-  // Prevent background scrolling
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
 
@@ -29,7 +27,6 @@ function Modal({ isOpen, onClose, title, children }) {
     };
   }, [isOpen]);
 
-  // Don't render anything when modal is closed
   if (!isOpen) {
     return null;
   }
@@ -39,13 +36,11 @@ function Modal({ isOpen, onClose, title, children }) {
       onClick={onClose}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
     >
-      {/* Modal Panel */}
       <div
         onClick={(event) => event.stopPropagation()}
         className="w-full max-w-lg rounded-xl bg-white shadow-xl"
       >
 
-        {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
 
           <h2 className="font-display text-lg font-bold text-slate-900">
@@ -63,7 +58,6 @@ function Modal({ isOpen, onClose, title, children }) {
 
         </div>
 
-        {/* Content */}
         <div className="max-h-[80vh] overflow-y-auto px-6 py-5">
           {children}
         </div>

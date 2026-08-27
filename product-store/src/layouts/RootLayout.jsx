@@ -12,11 +12,9 @@ function RootLayout() {
   return (
     <div className="min-h-screen bg-slate-50">
 
-      {/* Navbar */}
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
 
-          {/* Logo */}
           <NavLink
             to="/products"
             className="flex items-center gap-2 text-teal-700"
@@ -28,7 +26,6 @@ function RootLayout() {
             </span>
           </NavLink>
 
-          {/* Navigation */}
           <nav className="flex items-center gap-5">
 
             <NavLink
@@ -52,7 +49,6 @@ function RootLayout() {
               Admin
             </NavLink>
 
-            {/* Cart icon */}
             <button
               type="button"
               className="relative rounded-md p-2 text-slate-700 hover:text-teal-700"
@@ -68,12 +64,10 @@ function RootLayout() {
         </div>
       </header>
 
-      {/* Child pages render here */}
       <main className="mx-auto w-full max-w-6xl px-4 py-8">
         <Outlet />
       </main>
 
-      {/* Footer */}
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-6xl px-4 py-6 text-center text-sm text-slate-500">
           Product Store

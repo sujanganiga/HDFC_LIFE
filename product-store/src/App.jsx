@@ -12,6 +12,7 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import CartPage from "./pages/CartPage";
 import AdminPage from "./pages/AdminPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import KeysPracticePage from "./pages/KeysPracticePage";
 
 function RequireAdmin({ children }) {
   const isAdmin = false;
@@ -62,6 +63,11 @@ function App() {
                 <AdminPage />
               </RequireAdmin>
             }
+          />
+
+          <Route
+            path="/keys"
+            element={<KeysPracticePage />}
           />
 
           <Route
