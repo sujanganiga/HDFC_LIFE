@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Position Lab</title>
+
+    <style>
+        .avatarMain {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+
+            background: lightblue;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            font-size: 40px;
+        }
+
+        .noti {
+            position: absolute;
+
+            top: -5px;
+            right: -5px;
+
+            width: 25px;
+            height: 25px;
+
+            background: red;
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 14px;
+        }
+        .notifiymain{
+            border: 1px solid black;
+            padding: 20px;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20rem;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Position Lab</h1>
+
+    <div class="notifiymain">
+
+
+        <h2>Notification Badge</h2>
+
+        <div class="avatarMain">
+
+            <div class="avatar">
+                A
+            </div>
+
+            <div class="noti">
+                3
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
