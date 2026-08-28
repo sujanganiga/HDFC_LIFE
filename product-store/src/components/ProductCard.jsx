@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart, Star } from "lucide-react";
+import useCartStore from "../store/useCartStore";
 
-function ProductCard({ product, onAddToCart }) {
+function ProductCard({ product }) {
+  const addItem = useCartStore(
+    (state) => state.addItem
+  );
+
   return (
     <article className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
 
-      {/* Product Image */}
       <Link to={`/products/${product.id}`}>
         <div className="relative">
 
@@ -24,11 +28,10 @@ function ProductCard({ product, onAddToCart }) {
         </div>
       </Link>
 
-      {/* Product Information */}
       <div className="p-4">
 
         <Link to={`/products/${product.id}`}>
-          <h2 className="font-display truncate font-bold text-slate-900 hover:text-teal-700">
+          <h2 className="truncate font-display font-bold text-slate-900 hover:text-teal-700">
             {product.title}
           </h2>
         </Link>
@@ -44,22 +47,15 @@ function ProductCard({ product, onAddToCart }) {
           </p>
 
           <div className="flex items-center gap-1 text-sm text-slate-600">
-            <Star
-              size={16}
-              fill="currentColor"
-            />
-
-            <span>
-              {product.rating}
-            </span>
+            <Star size={16} fill="currentColor" />
+            <span>{product.rating}</span>
           </div>
 
         </div>
 
-        {/* Add to Cart */}
         <button
           type="button"
-          onClick={() => onAddToCart(product)}
+          onClick={() => addItem(product)}
           className="mt-4 flex min-h-10 w-full items-center justify-center gap-2 rounded-lg bg-teal-700 px-4 py-2.5 font-medium text-white hover:bg-teal-800"
         >
           <ShoppingCart size={18} />

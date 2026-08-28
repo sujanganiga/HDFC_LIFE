@@ -1,7 +1,23 @@
+
 import { NavLink, Outlet } from "react-router-dom";
-import { Boxes, ShoppingCart } from "lucide-react";
+import {
+  Boxes,
+  ShoppingCart,
+} from "lucide-react";
+
+import useCartStore from "../store/useCartStore";
 
 function RootLayout() {
+  const items = useCartStore(
+    (state) => state.items
+  );
+
+  // Total quantity of all products
+  const cartCount = items.reduce(
+    (total, item) => total + item.qty,
+    0
+  );
+
   const navLinkClass = ({ isActive }) =>
     `font-medium transition ${
       isActive
@@ -12,20 +28,23 @@ function RootLayout() {
   return (
     <div className="min-h-screen bg-slate-50">
 
+      {/* Navbar */}
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
 
+          {/* Logo */}
           <NavLink
             to="/products"
             className="flex items-center gap-2 text-teal-700"
           >
-            <Boxes size={26} strokeWidth={2} />
+            <Boxes size={26} />
 
             <span className="font-display text-xl font-bold tracking-tight">
               Store
             </span>
           </NavLink>
 
+          {/* Navigation */}
           <nav className="flex items-center gap-5">
 
             <NavLink
@@ -49,25 +68,32 @@ function RootLayout() {
               Admin
             </NavLink>
 
-            <button
-              type="button"
+            {/* Cart */}
+            <NavLink
+              to="/cart"
+              aria-label={`Cart with ${cartCount} items`}
               className="relative rounded-md p-2 text-slate-700 hover:text-teal-700"
             >
               <ShoppingCart size={20} />
 
-              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs text-white">
-                3
-              </span>
-            </button>
+              {/* Cart Badge */}
+              {cartCount > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-semibold text-white">
+                  {cartCount}
+                </span>
+              )}
+            </NavLink>
 
           </nav>
         </div>
       </header>
 
+      {/* Page Content */}
       <main className="mx-auto w-full max-w-6xl px-4 py-8">
         <Outlet />
       </main>
 
+      {/* Footer */}
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-6xl px-4 py-6 text-center text-sm text-slate-500">
           Product Store
@@ -79,3 +105,4 @@ function RootLayout() {
 }
 
 export default RootLayout;
+

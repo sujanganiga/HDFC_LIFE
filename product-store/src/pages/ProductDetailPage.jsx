@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -7,9 +8,14 @@ import {
 } from "lucide-react";
 
 import api from "../api/axiosInstance";
+import useCartStore from "../store/useCartStore";
 
 function ProductDetailPage() {
   const { id } = useParams();
+
+  const addItem = useCartStore(
+    (state) => state.addItem
+  );
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,6 +27,8 @@ function ProductDetailPage() {
 
     const getProduct = async () => {
       try {
+        setLoading(true);
+
         const response = await api.get(`/products/${id}`);
 
         if (cancelled) return;
@@ -32,6 +40,7 @@ function ProductDetailPage() {
         if (cancelled) return;
 
         console.error(err);
+
         setError(
           "Unable to load this product. Please try again."
         );
@@ -53,12 +62,15 @@ function ProductDetailPage() {
     window.location.reload();
   };
 
+  /* Loading state */
   if (loading) {
     return (
       <div className="animate-pulse">
+
         <div className="h-5 w-32 rounded bg-slate-200" />
 
         <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
+
           <div>
             <div className="h-[450px] rounded-xl bg-slate-200" />
 
@@ -71,19 +83,26 @@ function ProductDetailPage() {
 
           <div>
             <div className="h-8 w-3/4 rounded bg-slate-200" />
+
             <div className="mt-4 h-5 w-1/3 rounded bg-slate-200" />
+
             <div className="mt-6 h-10 w-1/4 rounded bg-slate-200" />
+
             <div className="mt-6 h-24 rounded bg-slate-200" />
+
             <div className="mt-6 h-12 rounded bg-slate-200" />
           </div>
+
         </div>
       </div>
     );
   }
 
+  /* Error state */
   if (error) {
     return (
       <div className="rounded-xl border border-red-200 bg-red-50 p-8 text-center">
+
         <h1 className="font-display text-2xl font-bold text-red-700">
           Product Not Available
         </h1>
@@ -99,6 +118,7 @@ function ProductDetailPage() {
         >
           Retry
         </button>
+
       </div>
     );
   }
@@ -114,7 +134,8 @@ function ProductDetailPage() {
 
   return (
     <div>
-      {/* Back */}
+
+      {/* Back to products */}
       <Link
         to="/products"
         className="inline-flex items-center gap-2 font-medium text-teal-700 hover:text-teal-800"
@@ -124,17 +145,23 @@ function ProductDetailPage() {
       </Link>
 
       <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-2">
-        {/* Images */}
+
+        {/* Product Images */}
         <section>
+
           <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+
             <img
               src={selectedImage}
               alt={product.title}
               className="h-[450px] w-full object-contain p-6"
             />
+
           </div>
 
+          {/* Image thumbnails */}
           <div className="mt-4 flex gap-3 overflow-x-auto">
+
             {images.map((image, index) => (
               <button
                 key={`${product.id}-${index}`}
@@ -153,27 +180,36 @@ function ProductDetailPage() {
                 />
               </button>
             ))}
+
           </div>
+
         </section>
 
-        {/* Details */}
+        {/* Product Details */}
         <section>
+
+          {/* Category */}
           <p className="text-sm font-medium uppercase tracking-wide text-teal-700">
             {product.category}
           </p>
 
+          {/* Title */}
           <h1 className="mt-2 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
             {product.title}
           </h1>
 
+          {/* Brand */}
           <p className="mt-3 text-slate-500">
             Brand:{" "}
+
             <span className="font-medium text-slate-700">
               {product.brand || "N/A"}
             </span>
           </p>
 
+          {/* Rating */}
           <div className="mt-5 flex items-center gap-2">
+
             <Star
               size={20}
               fill="currentColor"
@@ -183,9 +219,12 @@ function ProductDetailPage() {
             <span className="font-semibold">
               {product.rating}
             </span>
+
           </div>
 
+          {/* Price */}
           <div className="mt-6">
+
             <span className="font-display text-3xl font-bold text-slate-900">
               ${product.price}
             </span>
@@ -195,39 +234,51 @@ function ProductDetailPage() {
                 {Math.round(product.discountPercentage)}% OFF
               </span>
             )}
+
           </div>
 
+          {/* Description */}
           <div className="mt-6">
-            <h2 className="font-display text-lg font-bold">
+
+            <h2 className="font-display text-lg font-bold text-slate-900">
               Description
             </h2>
 
             <p className="mt-2 leading-relaxed text-slate-600">
               {product.description}
             </p>
+
           </div>
 
+          {/* Stock */}
           <div className="mt-6 text-sm text-slate-500">
+
             Stock available:{" "}
+
             <span className="font-semibold text-slate-800">
               {product.stock}
             </span>
+
           </div>
 
+          {/* Add to Cart */}
           <button
             type="button"
-            onClick={() =>
-              console.log("Add to cart:", product.title)
-            }
-            className="mt-7 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-teal-700 px-6 py-3 font-semibold text-white hover:bg-teal-800"
+            onClick={() => addItem(product)}
+            className="mt-7 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-teal-700 px-6 py-3 font-semibold text-white hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
           >
             <ShoppingCart size={20} />
+
             Add to Cart
           </button>
+
         </section>
+
       </div>
+
     </div>
   );
 }
 
 export default ProductDetailPage;
+
