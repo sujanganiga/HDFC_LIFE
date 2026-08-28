@@ -5,7 +5,7 @@ import {
   ShoppingCart,
   Trash2,
 } from "lucide-react";
-
+import { formatPrice,timeAgo } from '../utils/format'
 import useCartStore from "../store/useCartStore";
 
 function CartPage() {
@@ -112,7 +112,7 @@ function CartPage() {
                 </h2>
 
                 <p className="mt-1 text-slate-600">
-                  ${item.price.toFixed(2)}
+                  {formatPrice(item.price.toFixed(2))}
                 </p>
 
                 <div className="mt-4 flex flex-wrap items-center gap-4">
@@ -166,6 +166,10 @@ function CartPage() {
                     Remove
                   </button>
 
+                  <p className="text-xs text-slate-400">
+                    {timeAgo(item.addedAt)}
+                  </p>
+
                 </div>
 
               </div>
@@ -174,7 +178,7 @@ function CartPage() {
               <div className="text-right">
 
                 <p className="font-display text-lg font-bold text-slate-900">
-                  ${(item.price * item.qty).toFixed(2)}
+                  {formatPrice((item.price * item.qty).toFixed(2))}
                 </p>
 
               </div>
@@ -197,7 +201,7 @@ function CartPage() {
             </span>
 
             <span className="font-semibold text-slate-900">
-              ${subtotal.toFixed(2)}
+              {formatPrice(subtotal.toFixed(2))}
             </span>
           </div>
 
@@ -220,7 +224,7 @@ function CartPage() {
             </span>
 
             <span className="font-display text-xl font-bold text-slate-900">
-              ${subtotal.toFixed(2)}
+              {formatPrice(subtotal.toFixed(2))}
             </span>
 
           </div>

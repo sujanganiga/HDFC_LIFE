@@ -15,7 +15,6 @@ function FilterBar({
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
 
-        {/* Search */}
         <div>
           <label
             htmlFor="search"
@@ -35,17 +34,19 @@ function FilterBar({
               id="search"
               type="search"
               value={search}
-              onChange={(event) =>
+              onChange={
+                (event) =>
                 onSearchChange(event.target.value)
               }
               placeholder="Search products..."
               className="min-h-10 w-full rounded-lg border border-slate-300 py-2 pl-10 pr-3 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
             />
 
+            
+
           </div>
         </div>
 
-        {/* Category */}
         <div>
           <label
             htmlFor="category"
@@ -77,7 +78,6 @@ function FilterBar({
           </select>
         </div>
 
-        {/* Sort */}
         <div>
           <label
             htmlFor="sort"

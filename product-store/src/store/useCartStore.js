@@ -33,6 +33,7 @@ const useCartStore = create(
                 title: product.title,
                 price: product.price,
                 thumbnail: product.thumbnail,
+                addedAt: Date.now(),
                 qty: 1,
               },
             ],

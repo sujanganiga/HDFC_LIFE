@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart, Star } from "lucide-react";
 import useCartStore from "../store/useCartStore";
+import { formatPrice,getDiscountedPrice } from '../utils/format'
+import { toTitleCase } from '../utils/format'
 
 function ProductCard({ product }) {
   const addItem = useCartStore(
@@ -37,19 +39,35 @@ function ProductCard({ product }) {
         </Link>
 
         <p className="mt-1 text-sm text-slate-500">
-          {product.brand || "No brand"}
+          {toTitleCase(product.brand)|| "No brand"}
         </p>
 
         <div className="mt-3 flex items-center justify-between">
 
-          <p className="font-display text-lg font-bold text-slate-900">
-            ${product.price}
-          </p>
+            <p className="text-lg font-bold">{formatPrice(getDiscountedPrice(product))}</p>
 
-          <div className="flex items-center gap-1 text-sm text-slate-600">
-            <Star size={16} fill="currentColor" />
-            <span>{product.rating}</span>
-          </div>
+          <p className="line-through text-slate-400">
+            {formatPrice(product.price)}
+          </p>
+          
+
+          <div className="flex items-center">
+                {Array.from({ length: 5 }).map((_, index) => {
+                  const filled = index < Math.round(product.rating)
+
+                  return (
+                    <Star
+                      key={index}
+                      size={16}
+                      className={
+                        filled
+                          ? 'fill-yellow-400 text-yellow-400'
+                          : 'text-slate-300'
+                      }
+                    />
+                  )
+                })}
+        </div>
 
         </div>
 

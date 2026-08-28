@@ -10,6 +10,8 @@ import {
 import api from "../api/axiosInstance";
 import useCartStore from "../store/useCartStore";
 
+import { formatPrice } from '../utils/format'
+
 function ProductDetailPage() {
   const { id } = useParams();
 
@@ -226,7 +228,7 @@ function ProductDetailPage() {
           <div className="mt-6">
 
             <span className="font-display text-3xl font-bold text-slate-900">
-              ${product.price}
+              {formatPrice(product.price)}
             </span>
 
             {product.discountPercentage > 0 && (
@@ -244,7 +246,7 @@ function ProductDetailPage() {
               Description
             </h2>
 
-            <p className="mt-2 leading-relaxed text-slate-600">
+            <p className="line-clamp-2 text-sm text-slate-600">
               {product.description}
             </p>
 

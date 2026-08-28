@@ -121,7 +121,6 @@ function ProductsPage() {
   return (
     <div>
 
-      {/* Heading */}
       <div className="mb-8">
 
         <p className="text-sm font-medium uppercase tracking-wide text-teal-700">
@@ -138,7 +137,12 @@ function ProductsPage() {
 
       </div>
 
-      {/* Filters */}
+      <p className="mb-4 text-sm text-slate-500">
+              {search
+                ? `${sortedProducts.length} products for '${search}'`
+                : `${sortedProducts.length} products found`}
+            </p>
+
       <FilterBar
         search={search}
         category={category}
@@ -161,7 +165,6 @@ function ProductsPage() {
         }
       />
 
-      {/* Loading */}
       {loading && (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
@@ -188,7 +191,6 @@ function ProductsPage() {
         </div>
       )}
 
-      {/* Error */}
       {!loading && error && (
         <div className="rounded-xl border border-red-200 bg-red-50 p-8 text-center">
 
@@ -211,7 +213,6 @@ function ProductsPage() {
         </div>
       )}
 
-      {/* Empty */}
       {!loading &&
         !error &&
         sortedProducts.length === 0 && (
@@ -228,11 +229,11 @@ function ProductsPage() {
           </div>
         )}
 
-      {/* Products */}
       {!loading &&
         !error &&
         sortedProducts.length > 0 && (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            
 
             {sortedProducts.map(
               (product) => (
