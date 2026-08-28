@@ -14,6 +14,8 @@ import AdminPage from "./pages/AdminPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import KeysPracticePage from "./pages/KeysPracticePage";
 
+
+
 function RequireAdmin({ children }) {
   const isAdmin = false;
 
@@ -73,6 +75,10 @@ function App() {
           <Route
             path="*"
             element={<NotFoundPage />}
+          />
+          <Route
+            path="/products/:id"
+            element={<ProductDetailPage />}
           />
 
         </Route>
