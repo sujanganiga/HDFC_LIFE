@@ -96,9 +96,9 @@ function KeysPracticePage() {
 
       <div className="mt-6 space-y-3">
 
-        {productList.map((product, index) => (
+        {productList.map((product) => (
           <ProductRow
-            key={product.id}
+            key={product.id}//index changed to product.id fixed bug
             product={product}
           />
         ))}
